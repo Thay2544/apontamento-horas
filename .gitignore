@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.vscode/
+.DS_Store
+
+.firebase/
+.firebaserc.local
+serviceAccount*.json
+.env
+.env.*
