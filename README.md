@@ -1,4 +1,4 @@
-# Apontamento de Horas (Firebase)
+# APP Apontamento de Horas
 
 App web para registrar horas planejadas de auditores por trabalho auditado
 
