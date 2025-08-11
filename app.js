@@ -45,178 +45,37 @@ const adminOptions = [
 const stageOptions = ['Planejamento','Execução','Comunicação','Monitoramento','Revisão'];
 
 // Projetos por usuário
-const userProjects = {"vitor": [
-    "2.6 Auditoria de controles de contratos venda etanol",
-    "S/N Cessões de créditos",
-    "11_1T_2025_AOP Recebimento e classificação",
-    "17_2T_2025_AOP Cadastro/tesouraria/fluxo de caixa",
-    "18_2T_2025_AOP Ciclo de negociação",
-    "21_2T_2025_ATC Segurança de acesso terceiros",
-    "NP01_1T_2025_AOP Investigação Balsas/Sinop Especialista de obras x Muninsc",
-    "NP03_1T_2025_AOP Supervisor obras x Aço Ferro MS",
-    "NP03_4T_2024_AOP Dourados Supervisor de manutenção x Medina Oliveira/3R",
-    "NP04_1T_2025_AOP Fretes DDGS",
-    "NP04_4T_2024_AOP Sidrolândia Especialista de obras x WM montagens",
-    "NP06_2T_2025_AOP Validação de pontos Consultoria Prado e Suzuki",
-    "NP25_2T_2025_AOP Recebimento de propina MF inspeções e montagens"
+const userProjects = {"José": [
+    "classificação de grãos",
+    "Destilaria e apontamentos"
   ],
-  "marcio": [
-    "01_2T_2025_AOP Processo de transferência de milho de armazenagem para a indústria",
-    "02_2T_2025_AOP Processo de aquisição, arrendamento, venda de caminhões e reboques",
-    "03_2T_2025_AOP Biomassa - Contratos de classificação",
-    "07_2T_2025_AOP Contratos de compras",
-    "17_2T_2025_AOP Cadastro/tesouraria/fluxo de caixa",
-    "18_2T_2025_AOP Ciclo de negociação",
-    "38_2T_2025_AOP Verificações de inventários cíclicos OPEX 07_2025",
-    "NP06_2T_2025_AOP Validação de pontos Consultoria Prado e Suzuki",
-    "NP09_2T2025_AOP Conferência de inspeções de saída (patrimonial) - Nova Mutum",
-    "NP13_2T_2025_AOP Estoque de Milho - Ajustes e inventário",
-    "NP21_2T_2025_AOP Inventários rotativos, controles de estoques",
-    "NP23_2T_2025_AOP Transportes DDGS - Imbituba",
-    "29_2T_2025_AOP Verificações de inventários cíclicos OPEX 06_2025",
-    "Supervisor de manutenção automotiva",
-    "Fluxo de compras frotas",
+  "maria": [
+    "Inventários",
+    "Controle de Diesel",
+    "Fluxo frotas",
     "Investigação 07 - Conferência de pagamento dos transportadores"
   ],
   "pedro": [
-    "02_2T_2025_AOP Processo de aquisição, arrendamento, venda de caminhões e reboques",
-    "11_1T_2025_AOP Recebimento e classificação",
-    "15_2T_2025_AOP Contratos de serviços corporativos consultorias INPASA",
-    "16_2T_2025_AOP Consultorias INFINITI",
-    "29_2T_2025_AOP Verificações de inventários cíclicos OPEX 06_2025",
-    "38_2T_2025_AOP Verificações de inventários cíclicos OPEX 07_2025",
-    "Verificações de inventários cíclicos OPEX 08_2025",
-    "Verificações de inventários cíclicos OPEX 09_2025",
-    "Verificações de inventários cíclicos OPEX 10_2025",
-    "Verificações de inventários cíclicos OPEX 11_2025",
-    "Verificações de inventários cíclicos OPEX 12_2025",
-    "NP08_2T_2025_AOP Conferência de inspeções de saída (patrimonial) - DRD",
-    "NP10_2T_2025_ATC Faturamento - Processo de refaturamento (CORP)",
-    "NP13_2T_2025_AOP Estoque de Milho - Ajustes e inventário",
-    "NP29_2T_2025_AOP Desfazimento de contratos de Etanol 2025",
-    "NP32_3T_2025_AOP Investigação Saulo Supervisor Sinop",
-    "NP33_3T_2025_AOP Investigação Ana vs Maneira Advogados",
-    "NP34_3T_2025_AOP Investigação Tiago Roberto do Nascimento",
-    "NP35_3T_2025_AOP Investigação do Comercial de Biomassa"
+    "Frota de veículo",
+    "Estoque de Milho"
   ],
-  "jakeline": [
-    "07_2T_2025_AOP Contratos de compras",
-    "NP16_2T_2025_AOP Due dilligence novos fornecedores"
+  "natasha": [
+    "NP16_2T_2025_AOP Due dilligence fornecedores"
   ],
-  "raquel": [
-    "01_2T_2025_AOP Processo de transferência de milho de armaze nagem para a indústria",
-    "29_2T_2025_AOP Verificações de inventários cíclicos OPEX 06_2025",
-    "38_3T_2025_AOP Verificações de inventários cíclicos OPEX 07_2025",
-    "Verificações de inventários cíclicos OPEX 08_2025",
-    "Verificações de inventários cíclicos OPEX 09_2025",
-    "Verificações de inventários cíclicos OPEX 10_2025",
-    "Verificações de inventários cíclicos OPEX 11_2025",
-    "Verificações de inventários cíclicos OPEX 12_2025",
-    "31_3T_2025_AOP Serviços de plantio Francio/serviços de locação de equipamentos estradas",
-    "30_3T_2025_AOP Ciclo de compras negociações"
+  "miguel": [
+    "projetos iniciais de obras",
+    "planejamento de materiais de obras CAPEX"
   ],
-  "elaine": [
-    "Contratos de classificação (prestadores de serviço)",
-    "Cobranças de caixinha carregamentos DDGS Dourados",
-    "03_2T_2025_ACN Diagnóstico Deloitte",
-    "07_2T_2025_AOP Contratos de compras",
-    "15_2T_2025_AOP Contratos de serviços corporativos consultorias INPASA",
-    "16_2T_2025_AOP Consultorias INFINITI",
-    "29_2T_2025_AOP Verificações de inventários cíclicos OPEX 06_2025",
-    "38_2T_2025_AOP Verificações de inventários cíclicos OPEX 07_2025",
-    "Verificações de inventários cíclicos OPEX 08_2025",
-    "Verificações de inventários cíclicos OPEX 09_2025",
-    "Verificações de inventários cíclicos OPEX 10_2025",
-    "Verificações de inventários cíclicos OPEX 11_2025",
-    "Verificações de inventários cíclicos OPEX 12_2025",
-    "NP07_2T_2025_AOP Avaliação da contratação de média tensão Balsas",
-    "NP11_2T_2025_AOP Avaliação da contratação de isolamentos Caldeiras Balsas",
-    "NP13_2T_2025_AOP Estoque de Milho - Ajustes e inventário",
-    "NP17_2T_2025_ACN Rotina de Faturamento x Retorno x Refaturamento",
-    "NP19_2T_2025_ACN Rotina de Preço Médio",
-    "NP25_2T_2025_AOP Recebimento de propina MF inspeções e montagens",
-    "NP32_3T_2025_AOP Investigação Saulo Supervisor Sinop",
-    "NP33_3T_2025_AOP Investigação Ana vs Maneira Advogados",
-    "NP34_3T_2025_AOP Investigação Tiago Roberto do Nascimento",
-    "NP35_3T_2025_AOP Investigação do Comercial de Biomassa"
+  "leticia": [
+    "Investigação",
+    "Balanço Patrimonial"
   ],
-  "rafael": [
-    "Cobranças de caixinha carregamentos DDGS Dourados",
-    "08_2T_2025_ACN Validação de 10 SQLs junto com à Tetra",
-    "10_2T_2025_ACN Validação do KPI de Rendimento de Etanol",
-    "14_2T_2025_AOP Integridade de informações imóveis grupo",
-    "NP02_1T_2024_AOP Inventário de ativos eletrônicos",
-    "NP05_1T_2025_AOP Supervisora obras x CONSTRUBEM",
-    "NP07_2T_2025_AOP Avaliação da contratação de média tensão Balsas",
-    "NP08_2T2025_AOP Conferência de inspeções de saída (patrimonial) - DRD",
-    "NP09_2T2025_AOP Conferência de inspeções de saída (patrimonial) - Nova Mutum",
-    "NP11_2T_2025_AOP Avaliação da contratação de isolamentos Caldeiras Balsas",
-    "NP22_2T_2025_AOP Falsificação documental homologação TGM",
-    "NP25_2T_2025_AOP Recebimento de propina MF inspeções e montagens"
+  "josefina": [
+  "Demandas Etanol",
+  "Cavaco e biomassas"
   ],
-  "joel": [
-    "29_2T_2025_AOP Verificações de inventários cíclicos OPEX 2025",
-    "Verificações de inventários cíclicos OPEX 08_2025",
-    "Verificações de inventários cíclicos OPEX 09_2025",
-    "Verificações de inventários cíclicos OPEX 10_2025",
-    "Verificações de inventários cíclicos OPEX 11_2025",
-    "Verificações de inventários cíclicos OPEX 12_2025",
-    "31_3T_2025_AOP Serviços de plantio Francio/serviços de locação de equipamentos estradas",
-    "30_3T_2025_AOP Ciclo de compras negociações"
-  ],
-  "cely": [
-    "08_2T_2025_ACN Validação de 10 SQLs junto com à Tetra",
-    "09_2T_2025_ACN Monitoramento (Catraca x Ponto)",
-    "10_2T_2025_ACN Validação do KPI de Rendimento de Etanol",
-    "25_2T_2025_ACN Painel de Aderência às Recomendações da Auditoria",
-    "26_2T_2025_ACN Workflow Auditoria Contínua",
-    "32_3T_2025_ACN Manutenção de Rotinas no Highbond",
-    "34_3T_2025_ACN Prorrogação de títulos a Pagar",
-    "36_3T_2025_ACN Pagamento à funcionários CLT fora da folha de pagamento",
-    "37_3T_2025_ACN Rotina de Jornada de Trabalho Fantasma - (Parte II)",
-    "NP02_1T_2024_AOP Inventário de ativos eletrônicos",
-    "NP18_2T_2025_ACN Desenvolvimento One Lake",
-    "NP19_2T_2025_ACN Rotina de Jornada de Trabalho Fantasma (Parte I)",
-    "NP20_2T_2025_ACN Integração entre o SOGI e o Painel de Obrigações",
-    "NP30_3T_2025_ACN Painel de Movimentação Catraca (Obras)",
-    "NP31_3T_2025_ACN Rotina de Preço Médio (Preventivo)"
-  ],
-  "sandra": [
-    "05_2T_2025_ATC Almoxarifado Capex - Inventário e Controle de Estoque",
-    "12_2T_2025_ATC Manutenção Industrial - Manutenções Externas",
-    "27_2T_2025_ATC Gestão de cabos elétricos - Conformidades procedimentos de gestão BALSAS-MA",
-    "NP24_2T_2025_ATC Cadastro de códigos de itens CS BRINDES",
-    "NP28_2T_2025_ATC Inventário Surpresa - Almoxarifado Capex - 07_2025",
-  ],
-  "thayanne": [
-    "03_2T_2025_ATC Processo de triangulação de nota fiscal",
-    "04_2T_2025_ATC Insumos industriais - Processo de recebimento de Ureia",
-    "06_2T_2025_ATC Manutenção Industrial - Indicadores KPI (ICOT)",
-    "13_2T_2025_ATC Ciclo de verificação Zortea",
-    "NP15_2T_2025_ACN Avaliação de Compras x Movimentação de Materiais em Estoque",
-    "NP26_2T_2025_ATC Investigação venda de sucata",
-    "NP27_2T_2025_ATC Medições de serviços CH Master",
-    "38_3T_2025_ATC Outorgas de água",
-    "NP_32_3T_2025_AOP Incêndio Torre de resfriamento SNP"
-  ],
-  "wellington": [
-    "Supervisor de manutenção automotiva",
-    "Gerente de manutenção x JÁ manutenção",
-    "Fluxo de compras frotas",
-    "28_3T_2025_ATC Mapear processo atrelado ao ADM Obras",
-    "20_2T_2025_ATC Boletim de medições - Remodelagem de documento processo",
-    "24_2T_2025_ATC Medições de contratos (criação de inspeções operacionais)"
-  ],
-  "bruno": [
-    "08_2T_2025_ACN Validação de 10 SQLs junto com à Tetra",
-    "10_2T_2025_ACN Validação do KPI de Rendimento de Etanol",
-    "NP20_2T_2025_ACN Integração entre o SOGI e o Painel de Obrigações"
-  ],
-   "denise": [
-    "38_3T_2025_ATC Outorgas de água"
-  ],
-   "cristian": [
-    "38_3T_2025_ATC Outorgas de água"
+  "lucas": [
+    "procedimento de uso de aguas"
   ]
 };
 
@@ -274,10 +133,8 @@ auth.onAuthStateChanged(user => {
   if (!user) return;
   const email = user.email.toLowerCase();
   const lista = [
-    'thayanne','manoel','celly','elaine','daniele',
-    'hubner','izu','juliana','lacerda','joelviana',
-    'pedro','rafael','raquel','sanbacetto','jakeline',
-    'denise','thiago','cristian'
+    'jose','maria','pedro','natasha','miguel',
+    'leticia','josefina','lucas'
   ];
   userPhoto.src = (lista.find(n => email.includes(n)) || 'padrao') + '.jpg';
   const fn = user.displayName.split(' ')[0];
@@ -297,9 +154,9 @@ auth.onAuthStateChanged(user => {
   }
 
   const teams = {
-    auditoriaTecnica: ['sandra','hubner','thayanne','denise','daniele','cristian'],
-    auditoriaContinua: ['celly','manoel','thiago'],
-    gestao: ['izu']
+    auditoriaTecnica: ['natasha','pedro'],
+    auditoriaContinua: ['maria','leticia','lucas'],
+    gestao: ['jose']
   };
   let team = 'Auditoria de Operações';
   const uname = fn.toLowerCase();
@@ -502,4 +359,5 @@ function renderRow(data, key) {
   tr.appendChild(tdAct);
 
   historyTableBody.appendChild(tr);
+
 }
