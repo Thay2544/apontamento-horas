@@ -1,0 +1,172 @@
+/* ========== style-modern.css (com efeito milho) ========== */
+:root{
+  --brand-100:#eaf0ff; --brand-300:#aac6ff; --brand-500:#004080;
+  --surface:#ffffff; --text-primary:#1b1b1b; --text-muted:#6f6f6f;
+  --radius-xl:24px; --shadow:0 6px 20px rgba(0,0,0,.08);
+  --transition:.25s cubic-bezier(.4,0,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',Segoe UI,sans-serif}
+
+/* plano de fundo geral */
+body{
+  min-height:100vh;
+  background:linear-gradient(135deg,#eef3ff 0%,#f7f9fc 100%);
+  display:flex;flex-direction:column;align-items:center;
+}
+
+/* cabeçalho */
+header{background:transparent;color:var(--brand-500);
+  margin:40px 0 24px;display:flex;align-items:center;gap:12px}
+header img{height:64px}
+header h1{font-size:28px;font-weight:600}
+
+/* card */
+.container{
+  width:clamp(340px,92vw,560px);
+  background:var(--surface);
+  border-radius:var(--radius-xl);
+  box-shadow:var(--shadow);
+  padding:40px;
+  display:flex;flex-direction:column;gap:24px;
+  transition:var(--transition)
+}
+.container:hover{transform:translateY(-2px)}
+
+/* avatar + saudações */
+.user-greeting{display:flex;flex-direction:column;align-items:center;gap:14px}
+.user-greeting img{width:120px;height:120px;border-radius:50%;object-fit:cover;
+  border:4px solid var(--brand-100);box-shadow:0 0 0 6px var(--surface),var(--shadow)}
+.user-greeting h2{font-size:26px;color:var(--brand-500);font-weight:600}
+.user-greeting p{font-size:17px;color:var(--text-muted)}
+#userCell{font-size:14px}
+
+/* formulário */
+label{font-size:15px;font-weight:500;color:var(--text-primary);margin-bottom:6px}
+input,select,button{width:100%;border:none;border-radius:12px;
+  padding:18px 42px 18px 16px;font-size:17px}
+input,select{background:var(--brand-100);color:var(--text-primary);transition:var(--transition)}
+input:focus,select:focus{outline:none;box-shadow:0 0 0 3px var(--brand-300)}
+select{-webkit-appearance:none;-moz-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23666' d='M0 0l5 6 5-6H0z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center}
+button{background:var(--brand-500);color:#fff;font-weight:600;
+  letter-spacing:.3px;cursor:pointer;transition:var(--transition);box-shadow:var(--shadow)}
+button:hover:not(:disabled){filter:brightness(1.05);transform:translateY(-1px)}
+button:disabled{background:#bcc7df;cursor:not-allowed;box-shadow:none}
+#timer{font-size:18px;text-align:center;color:var(--brand-500)}
+
+/* ---------- HISTÓRICO ---------- */
+#historySection{position:relative;left:50%;transform:translateX(-50%);
+  width:calc(100vw - 80px);max-width:1200px;margin-top:40px}
+#historySection h3{font-size:20px;font-weight:600;color:var(--brand-500);padding-left:8px}
+
+/* tabela */
+table{border-collapse:separate;border-spacing:0 10px;width:100%}
+#historySection table{table-layout:fixed}
+thead th{font-size:13px;padding:8px;text-align:center;color:#fff;background:var(--brand-500)}
+tbody tr{background:var(--surface);border-radius:12px;box-shadow:var(--shadow)}
+tbody tr td{padding:10px;font-size:12px;text-align:center;word-wrap:break-word}
+tbody tr td:first-child{border-radius:12px 0 0 12px}
+tbody tr td:last-child{border-radius:0 12px 12px 0}
+td[contenteditable]{background:#fffdf5}
+
+/* DATA input compacto */
+#historyTableBody input[type=date]{font-size:11px;padding:8px 10px}
+
+/* selects no histórico – corta com reticências */
+#historyTableBody select{
+  display:inline-block;width:auto;min-width:110px;max-width:190px;
+  font-size:12px;padding-right:.6rem;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+
+/* botões ação */
+td button{background:var(--brand-100);color:var(--brand-500);
+  padding:6px 10px;font-size:15px;border-radius:8px}
+td button:hover{background:var(--brand-300);color:#fff}
+
+@media(min-width:900px){.container{margin:40px auto}}
+
+/* ======================================================
+   EFEITO MILHOS SUBINDO (pode trocar por bolhas circulares)
+   ====================================================== */
+/* ===== milho que sobe (versão emoji) ===== */
+#milhos{pointer-events:none;position:fixed;inset:0;overflow:hidden;z-index:-1}
+#milhos span{
+  position:absolute;bottom:-60px;
+  width:40px;height:40px;               /* área “invisível” */
+  animation:subir 8s linear infinite;opacity:.9;
+  display:flex;align-items:center;justify-content:center;
+}
+#milhos span::before{content:'🌽';font-size:32px;}
+
+/* velocidade, escala e posições aleatórias */
+#milhos span:nth-child(1){left:10%;animation-duration:9s; animation-delay:-2s;transform:scale(.9)}
+#milhos span:nth-child(2){left:30%;animation-duration:11s;animation-delay:-4s;transform:scale(1.2)}
+#milhos span:nth-child(3){left:55%;animation-duration:8s; animation-delay:-6s;transform:scale(.7)}
+#milhos span:nth-child(4){left:72%;animation-duration:10s;animation-delay:-3s;transform:scale(1)}
+#milhos span:nth-child(5){left:85%;animation-duration:7s; animation-delay:-5s;transform:scale(.8)}
+
+@keyframes subir{
+  0%{transform:translateY(0) rotate(0deg) scale(1);opacity:.9}
+  100%{transform:translateY(-120vh) rotate(360deg) scale(1);opacity:0}
+}/* ======================================================
+   EFEITO MILHOS E BOMBAS SUBINDO
+   ====================================================== */
+#milhos {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+#milhos span {
+  position: absolute;
+  bottom: -60px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: .9;
+  animation: subir 8s linear infinite;
+}
+
+/* ímpares sobem como milho */
+#milhos span:nth-child(odd)::before {
+  content: '🌽';
+  font-size: 32px;
+}
+/* pares sobem como bomba de combustível */
+#milhos span:nth-child(even)::before {
+  content: '⛽';
+  font-size: 32px;
+}
+
+/* velocidades, escalas e posições aleatórias */
+#milhos span:nth-child(1) {
+  left: 10%; animation-duration: 9s;  animation-delay: -2s; transform: scale(.9);
+}
+#milhos span:nth-child(2) {
+  left: 30%; animation-duration: 11s; animation-delay: -4s; transform: scale(1.2);
+}
+#milhos span:nth-child(3) {
+  left: 55%; animation-duration: 8s;  animation-delay: -6s; transform: scale(.7);
+}
+#milhos span:nth-child(4) {
+  left: 72%; animation-duration: 10s; animation-delay: -3s; transform: scale(1);
+}
+#milhos span:nth-child(5) {
+  left: 85%; animation-duration: 7s;  animation-delay: -5s; transform: scale(.8);
+}
+
+@keyframes subir {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: .9;
+  }
+  100% {
+    transform: translateY(-120vh) rotate(360deg) scale(1);
+    opacity: 0;
+  }
+}

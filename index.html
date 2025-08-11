@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apontamento de Horas - Auditoria</title>
+  <!-- Garante que process.env exista no browser -->
+  <script>
+    window.process = window.process || {};
+    process.env  = process.env  || {};
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+    header { background-color: #004080; color: white; padding: 20px; display: flex; align-items: center; justify-content: center; gap: 15px; }
+    header img { height: 50px; }
+    header h1 { font-size: 24px; margin: 0; }
+    .container { max-width: 700px; background: white; padding: 30px; margin: 30px auto; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .user-greeting { text-align: center; margin-bottom: 20px; }
+    .user-greeting img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid #004080; }
+    .user-greeting h2 { margin: 10px 0 5px; color: #004080; font-size: 20px; }
+    .user-greeting p { margin: 0; color: #444; font-size: 16px; }
+
+    /* Formatação básica */
+    label, input, button, select { display: block; width: 100%; margin-bottom: 15px; font-size: 16px; }
+    select { /* Reset da seta padrão */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      /* Estilo da caixa */
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 8px 30px 8px 10px;
+      border-radius: 4px;
+      /* Ícone customizado (seta) */
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23666' d='M0 0l5 6 5-6H0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+    }
+    button { padding: 12px; background-color: #004080; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.2s; }
+    button:disabled { background-color: #cccccc; cursor: not-allowed; }
+    button:hover:not(:disabled) { background-color: #0056b3; }
+    input:focus, select:focus { outline: 2px solid #0d6efd; }
+
+    #timer { text-align: center; margin-top: 20px; font-weight: bold; }
+    #loginBtn { margin: 20px auto; width: fit-content; padding: 10px 20px; }
+    #historySection { margin-top: 40px; padding-top: 30px; border-top: 2px solid #eee; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+    th { background-color: #004080; color: white; position: sticky; top: 0; z-index: 1; }
+    td[contenteditable] { background: #fffbe6; }
+    /* Zebra nas linhas pares */
+    #historyTableBody tr:nth-child(even) { background-color: #f8f9fa; }
+  </style>
+  <style>
+    /* todos os selects dentro da tabela de histórico */
+    #historyTableBody select {
+      display: inline-block;  /* não ocupa 100% da célula */
+      width: auto;            /* ajusta à largura do texto */
+      min-width: 120px;       /* garante que não colapse */
+      padding-right: .75rem;  /* espaço antes da setinha */
+    }
+  </style>
+  <link rel="stylesheet" href="style-modern.css">
+</head>
+</head>
+<body>
+  <header>
+    <img src="https://www.inpasa.com.br/images/logo.png" alt="Logo Inpasa">
+    <h1>Apontamento de Horas</h1>
+  </header>
+
+  <div class="container">
+    <div class="user-greeting">
+      <img src="" id="userPhoto" alt="Foto do usuário">
+      <h2 id="userName">Olá!</h2>
+      <p id="greeting-text">Tenha um excelente dia de trabalho!</p>
+      <p id="userCell" style="margin: 5px 0 0; color: #666; font-size: 14px;"></p>
+    </div>
+
+    <button id="loginBtn">Entrar com Google</button>
+
+    <label>Nome:</label>
+    <input type="text" id="name" readonly>
+
+    <label>Data:</label>
+    <input type="text" id="date" readonly>
+
+    <label>Subsistema:</label>
+    <select id="subsystem" disabled>
+      <option value="">Selecione</option>
+      <option value="Administrativo">Administrativo</option>
+      <option value="Auditoria">Auditoria</option>
+      <option value="Investigação">Investigação</option>
+    </select>
+
+    <label>Etapa:</label>
+    <select id="stage" disabled>
+      <option value="">Selecione</option>
+      <option value="Planejamento">Planejamento</option>
+      <option value="Execução">Execução</option>
+      <option value="Comunicação">Comunicação</option>
+      <option value="Monitoramento">Monitoramento</option>
+      <option value="Revisão">Revisão</option>
+    </select>
+
+<!-- Projetos -->
+    <label>Projeto:</label>
+    <select id="project" disabled>
+      <option value="">Selecione</option>
+    </select>
+    <label>Observação (máx. 100 caracteres)</label>
+    <input type="text" id="observation" maxlength="100" placeholder="Digite uma justificativa…" disabled>
+    <button id="startBtn" disabled>Iniciar Atividade</button>
+    <button id="stopBtn" disabled>Finalizar Atividade</button>
+    <div id="timer">Tempo: 00:00:00</div>
+
+    <div id="historySection">
+      <h3>Histórico de Apontamentos</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Subsistema</th>
+            <th>Projeto</th>
+            <th>Etapa</th>
+            <th>Início</th>
+            <th>Fim</th>
+            <th>Duração<br>(min / h)</th>
+            <th>Observação</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="historyTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+ <div id="milhos">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <!-- Firebase + App logic -->
+  <script src="app.js"></script>
+</body>
+</html>
